@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #D9DCDC;
+  color: #4D514F;
+}
+
+:root {
+  --verde-oscuro: #0F261E;
+  --verde: #446559;
+  --gris: #D9DCDC;
+}

@@ -1,1 +1,7 @@
-<p>camiones works!</p>
+<div class="grid">
+  <div *ngFor="let c of camiones" class="card">
+    <h3>{{ c.placa }}</h3>
+    <p>{{ c.disponible ? 'Disponible' : 'No disponible' }}</p>
+    <p>{{ c.conductor }}</p>
+  </div>
+</div>

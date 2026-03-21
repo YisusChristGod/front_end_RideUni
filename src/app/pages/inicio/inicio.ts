@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+export class InicioComponent { }
 
 @Component({
   selector: 'app-inicio',

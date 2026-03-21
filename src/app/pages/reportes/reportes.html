@@ -1,1 +1,20 @@
-<p>reportes works!</p>
+<div class="container">
+
+  <!-- IZQUIERDA: FORM -->
+  <div class="form">
+    <h2>Nuevo Reporte</h2>
+
+    <textarea [(ngModel)]="nuevoReporte"></textarea>
+    <button (click)="agregarReporte()">Enviar</button>
+  </div>
+
+  <!-- DERECHA: LISTA -->
+  <div class="lista">
+    <h2>Reportes</h2>
+
+    <div *ngFor="let r of reportes" class="card">
+      {{ r }}
+    </div>
+  </div>
+
+</div>
