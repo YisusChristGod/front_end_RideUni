@@ -1,7 +1,45 @@
-<div class="grid">
-  <div *ngFor="let c of camiones" class="card">
-    <h3>{{ c.placa }}</h3>
-    <p>{{ c.disponible ? 'Disponible' : 'No disponible' }}</p>
-    <p>{{ c.conductor }}</p>
+<div class="container">
+
+  <h1>Flota de Camiones</h1>
+  <p class="subtitle">Estado y detalles de cada unidad</p>
+
+  <div class="stats">
+    <span class="badge total">Total: {{ total }}</span>
+    <span class="badge ok">Disponibles: {{ disponibles }}</span>
+    <span class="badge bad" *ngIf="noDisponibles > 0">
+      No disponibles: {{ noDisponibles }}
+    </span>
   </div>
+
+  <div class="grid">
+    <div class="card" *ngFor="let c of camiones" [ngClass]="c.disponible ? 'top-ok' : 'top-bad'">
+
+      <div class="header">
+        <div class="icon">🚌</div>
+
+        <div>
+          <h2>{{ c.placa }}</h2>
+          <small>Unidad #{{ c.id }}</small>
+        </div>
+
+        <div class="status-icon">
+          <span *ngIf="c.disponible">✔</span>
+          <span *ngIf="!c.disponible">✖</span>
+        </div>
+      </div>
+
+      <span class="estado" [ngClass]="c.disponible ? 'ok' : 'bad'">
+        {{ c.disponible ? 'Disponible' : 'No Disponible' }}
+      </span>
+
+      <div class="conductor">
+        <p class="label">Conductor</p>
+        <p class="nombre">{{ c.conductor.nombre }}</p>
+        <hr>
+        <p class="telefono">{{ c.conductor.telefono }}</p>
+      </div>
+
+    </div>
+  </div>
+
 </div>

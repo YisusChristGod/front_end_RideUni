@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-
 import { InicioComponent } from './pages/inicio/inicio';
 import { InformacionComponent } from './pages/informacion/informacion';
 import { CamionesComponent } from './pages/camiones/camiones';

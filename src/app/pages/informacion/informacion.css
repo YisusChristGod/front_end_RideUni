@@ -1,0 +1,127 @@
+.info-container {
+  padding: 40px;
+  background: #D9DCDC;
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #0F261E;
+}
+
+.sub {
+  text-align: center;
+  color: #4D514F;
+  margin-bottom: 30px;
+}
+
+/* MAPA */
+.map-card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 40px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.map-placeholder {
+  height: 300px;
+  background: #cfd4d4;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4D514F;
+  font-weight: bold;
+}
+
+.map-placeholder.big {
+  height: 500px;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* barra estado */
+.top {
+  height: 5px;
+  border-radius: 10px 10px 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.ok {
+  background: #16a34a;
+}
+
+.bad {
+  background: #dc2626;
+}
+
+.estado {
+  margin-bottom: 10px;
+}
+
+.ok-text {
+  color: #16a34a;
+}
+
+.bad-text {
+  color: #dc2626;
+}
+
+/* info */
+.info {
+  background: #D9DCDC;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+/* SALIDA (lo que querías mejorar) */
+.salida {
+  margin-top: 15px;
+  background: #2f6b5a; /* verde medio elegante */
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+}

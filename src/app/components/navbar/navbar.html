@@ -1,11 +1,25 @@
 <nav class="navbar">
-  <div class="logo">RideUni</div>
 
-  <div class="links">
-    <a routerLink="">Inicio</a>
-    <a routerLink="informacion">Información</a>
-    <a routerLink="camiones">Camiones</a>
-    <a routerLink="reportes">Reportes</a>
-    <a routerLink="contacto">Contacto</a>
+  <div class="nav-container">
+
+    <!-- LOGO -->
+    <div class="logo">
+      <div class="icon">🚌</div>
+      <div>
+        <h1>RideUni</h1>
+        <span>Transporte Universitario</span>
+      </div>
+    </div>
+
+    <!-- MENU -->
+    <div class="menu">
+      <a routerLink="/">Inicio</a>
+      <a routerLink="/informacion">Información</a>
+      <a routerLink="/camiones" class="active">Camiones</a>
+      <a routerLink="/reportes">Reportes</a>
+      <a routerLink="/contacto">Contacto</a>
+    </div>
+
   </div>
+
 </nav>

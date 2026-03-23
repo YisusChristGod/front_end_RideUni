@@ -1,20 +1,47 @@
 <div class="container">
 
-  <!-- IZQUIERDA: FORM -->
-  <div class="form">
-    <h2>Nuevo Reporte</h2>
+  <h1>Sistema de Reportes</h1>
+  <p class="subtitle">Incidencias reportadas del servicio</p>
 
-    <textarea [(ngModel)]="nuevoReporte"></textarea>
-    <button (click)="agregarReporte()">Enviar</button>
-  </div>
+  <div class="layout">
 
-  <!-- DERECHA: LISTA -->
-  <div class="lista">
-    <h2>Reportes</h2>
+    <!-- FORMULARIO -->
+    <div class="formulario">
 
-    <div *ngFor="let r of reportes" class="card">
-      {{ r }}
+      <h2>Generar Reporte</h2>
+
+      <textarea
+        [(ngModel)]="nuevoReporte"
+        placeholder="Describe el problema... (Ej: el camión llegó tarde, no pasó, etc)"
+      ></textarea>
+
+      <button (click)="agregarReporte()">
+        Enviar Reporte
+      </button>
+
     </div>
+
+    <!-- LISTA -->
+    <div class="lista">
+
+      <h2>Reportes Recientes</h2>
+
+      <div class="card" *ngFor="let r of reportes">
+
+        <div class="icon">📄</div>
+
+        <div class="contenido">
+          <p class="desc">{{ r.descripcion }}</p>
+
+          <small class="fecha">
+            {{ r.fecha | date:'dd/MMM/yyyy, HH:mm' }}
+          </small>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
 </div>

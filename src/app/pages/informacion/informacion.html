@@ -1,1 +1,50 @@
-<p>informacion works!</p>
+<div class="info-container">
+
+  <h1>Información de Rutas</h1>
+  <p class="sub">Recorrido del transporte universitario</p>
+
+  <!-- MAPA -->
+  <div class="map-card" (click)="abrirMapa = true">
+    <div class="map-placeholder">
+      <span>Mapa de rutas (click para ampliar)</span>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal" *ngIf="abrirMapa" (click)="abrirMapa = false">
+    <div class="modal-content">
+      <div class="map-placeholder big">
+        <span>Mapa ampliado</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAMIONES EN RUTA -->
+  <h2>Unidades en Operación</h2>
+
+  <div class="grid">
+
+    <div class="card" *ngFor="let c of camiones">
+      <div class="top" [ngClass]="c.disponible ? 'ok' : 'bad'"></div>
+
+      <h3>{{ c.placa }}</h3>
+      <p class="estado" [ngClass]="c.disponible ? 'ok-text' : 'bad-text'">
+        {{ c.disponible ? 'Disponible' : 'No disponible' }}
+      </p>
+
+      <div class="info">
+        <p><strong>Conductor</strong></p>
+        <p>{{ c.conductor }}</p>
+        <hr>
+        <p>{{ c.telefono }}</p>
+      </div>
+
+      <!-- SALIDA -->
+      <div class="salida">
+        Salida: 7:25 AM
+      </div>
+    </div>
+
+  </div>
+
+</div>

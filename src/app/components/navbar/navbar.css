@@ -1,12 +1,64 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #D9DCDC;
-  color: #4D514F;
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background: linear-gradient(to right, #0F261E, #446559, #0F261E);
+  padding: 15px 0;
 }
 
-:root {
-  --verde-oscuro: #0F261E;
-  --verde: #446559;
-  --gris: #D9DCDC;
+/* CONTENEDOR CENTRADO */
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LOGO */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #D9DCDC;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.logo span {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.icon {
+  background: #D9DCDC;
+  color: #0F261E;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+/* MENU CENTRADO */
+.menu {
+  display: flex;
+  gap: 10px;
+}
+
+/* LINKS */
+.menu a {
+  text-decoration: none;
+  color: #D9DCDC;
+  padding: 8px 16px;
+  border-radius: 999px;
+  transition: 0.3s;
+}
+
+/* HOVER */
+.menu a:hover {
+  background: rgba(255, 255, 255, 0.1);
 }

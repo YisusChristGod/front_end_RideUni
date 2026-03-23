@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-export class InicioComponent { }
 
 @Component({
   selector: 'app-inicio',
-  imports: [],
+  standalone: true,
   templateUrl: './inicio.html',
-  styleUrl: './inicio.css',
+  styleUrl: './inicio.css'
 })
-export class Inicio {}
+export class InicioComponent {}
