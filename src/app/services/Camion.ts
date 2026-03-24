@@ -19,5 +19,15 @@ export class CamionService {
         return this.http.post(this.apiUrl, camion);
     }
 
-    
+    getCamionById(id: number) {
+        return this.http.get<Camion>(`${this.apiUrl}/${id}`);
+    }
+
+    updateCamion(id: number, camion: Camion) {
+        return this.http.put(`${this.apiUrl}/${id}`, camion);
+    }
+
+    deleteCamion(id: number) {
+        return this.http.delete(`${this.apiUrl}/${id}`);
+    }
 }
