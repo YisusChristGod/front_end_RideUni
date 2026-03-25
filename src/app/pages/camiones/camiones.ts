@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CamionService } from '../../services/Camion';
+import { ConductorService } from '../../services/Conductor';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-camiones',
@@ -8,46 +11,51 @@ import { CommonModule } from '@angular/common';
   templateUrl: './camiones.html',
   styleUrl: './camiones.css'
 })
-export class CamionesComponent {
+export class CamionesComponent implements OnInit {
 
-  camiones = [
-    {
-      id: 1,
-      placa: 'ABC-123',
-      disponible: true,
-      conductor: { nombre: 'Juan Pérez', telefono: '555-0101' }
-    },
-    {
-      id: 2,
-      placa: 'DEF-456',
-      disponible: true,
-      conductor: { nombre: 'María González', telefono: '555-0102' }
-    },
-    {
-      id: 3,
-      placa: 'GHI-789',
-      disponible: false,
-      conductor: { nombre: 'Carlos Ramírez', telefono: '555-0103' }
-    },
-    {
-      id: 4,
-      placa: 'JKL-012',
-      disponible: true,
-      conductor: { nombre: 'Ana Martínez', telefono: '555-0104' }
-    },
-    {
-      id: 5,
-      placa: 'MNO-345',
-      disponible: true,
-      conductor: { nombre: 'Luis Torres', telefono: '555-0105' }
-    },
-    {
-      id: 6,
-      placa: 'PQR-678',
-      disponible: false,
-      conductor: { nombre: 'Sofía López', telefono: '555-0106' }
-    }
-  ];
+  camiones: any[] = [];
+
+  constructor(
+    private camionService: CamionService,
+    private conductorService: ConductorService
+  ) {}
+
+  ngOnInit(): void {
+    this.cargarCamiones();
+  }
+
+  cargarCamiones(): void {
+    console.log('Iniciando carga de camiones...');
+    
+    forkJoin({
+      camiones: this.camionService.getCamion(),
+      conductores: this.conductorService.getConductor()
+    }).subscribe({
+      next: ({ camiones, conductores }) => {
+        console.log('Camiones recibidos:', camiones);
+        console.log('Conductores recibidos:', conductores);
+        
+        // Mapear conductores por ID
+        const conductoresMap = (conductores as any[]).reduce((map, conductor) => {
+          map[conductor.id] = conductor;
+          return map;
+        }, {});
+        
+        // Transformar datos al formato esperado
+        this.camiones = (camiones as any[]).map(c => ({
+          id: c.id,
+          placa: c.modelo,
+          disponible: c.disponibilidad,
+          conductor: conductoresMap[c.idConductor] || { nombre: 'Sin asignar', telefono: 'N/A' }
+        }));
+        
+        console.log('Camiones transformados:', this.camiones);
+      },
+      error: (error) => {
+        console.error('Error:', error);
+      }
+    });
+  }
 
   get total() {
     return this.camiones.length;
