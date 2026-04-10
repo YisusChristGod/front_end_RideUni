@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CamionService } from '../../services/Camion';
 import { ConductorService } from '../../services/Conductor';
@@ -17,7 +17,8 @@ export class CamionesComponent implements OnInit {
 
   constructor(
     private camionService: CamionService,
-    private conductorService: ConductorService
+    private conductorService: ConductorService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -25,35 +26,27 @@ export class CamionesComponent implements OnInit {
   }
 
   cargarCamiones(): void {
-    console.log('Iniciando carga de camiones...');
-    
     forkJoin({
       camiones: this.camionService.getCamion(),
       conductores: this.conductorService.getConductor()
     }).subscribe({
       next: ({ camiones, conductores }) => {
-        console.log('Camiones recibidos:', camiones);
-        console.log('Conductores recibidos:', conductores);
-        
-        // Mapear conductores por ID
+
         const conductoresMap = (conductores as any[]).reduce((map, conductor) => {
           map[conductor.id] = conductor;
           return map;
-        }, {});
-        
-        // Transformar datos al formato esperado
+        }, {} as any);
+
         this.camiones = (camiones as any[]).map(c => ({
           id: c.id,
           placa: c.modelo,
           disponible: c.disponibilidad,
           conductor: conductoresMap[c.idConductor] || { nombre: 'Sin asignar', telefono: 'N/A' }
         }));
-        
-        console.log('Camiones transformados:', this.camiones);
+
+        this.cdr.detectChanges();
       },
-      error: (error) => {
-        console.error('Error:', error);
-      }
+      error: (err) => console.error(err)
     });
   }
 
@@ -68,4 +61,5 @@ export class CamionesComponent implements OnInit {
   get noDisponibles() {
     return this.camiones.filter(c => !c.disponible).length;
   }
+
 }

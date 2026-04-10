@@ -6,9 +6,27 @@ import { ReportesComponent } from './pages/reportes/reportes';
 import { ContactoComponent } from './pages/contacto/contacto';
 
 export const routes: Routes = [
-  { path: '', component: InicioComponent },
-  { path: 'informacion', component: InformacionComponent },
-  { path: 'camiones', component: CamionesComponent },
-  { path: 'reportes', component: ReportesComponent },
-  { path: 'contacto', component: ContactoComponent }
+  {
+    path: '',
+    component: InicioComponent
+  },
+  {
+    path: 'informacion',
+    component: InformacionComponent,
+    runGuardsAndResolvers: 'always'
+  },
+  {
+    path: 'camiones',
+    component: CamionesComponent,
+    runGuardsAndResolvers: 'always'
+  },
+  {
+    path: 'reportes',
+    component: ReportesComponent,
+    runGuardsAndResolvers: 'always'
+  },
+  {
+    path: 'contacto',
+    component: ContactoComponent
+  }
 ];

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ReporteService } from '../../services/Reporrte';
 
 @Component({
   selector: 'app-reportes',
@@ -9,37 +10,67 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './reportes.html',
   styleUrl: './reportes.css'
 })
-export class ReportesComponent {
+export class ReportesComponent implements OnInit {
 
   nuevoReporte: string = '';
+  reportes: any[] = [];
+  loading = false;
 
-  reportes = [
-    {
-      id: 1,
-      descripcion: 'El camión ABC-123 no pasó por la parada de Ingeniería',
-      fecha: new Date()
-    },
-    {
-      id: 2,
-      descripcion: 'Retraso de 20 minutos en la ruta',
-      fecha: new Date()
-    },
-    {
-      id: 3,
-      descripcion: 'Camión fuera de servicio por mantenimiento',
-      fecha: new Date()
-    }
-  ];
+  constructor(
+    private reporteService: ReporteService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+  ngOnInit(): void {
+    this.cargarReportes();
+  }
+
+  cargarReportes(): void {
+    this.reporteService.getReporte().subscribe({
+      next: (data) => {
+        this.reportes = (data as any[]).map(r => ({
+          id: r.id,
+          descripcion: r.descripcion,
+          fecha: new Date(r.fecha)
+        }));
+
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error(err)
+    });
+  }
 
   agregarReporte() {
-    if (this.nuevoReporte.trim() === '') return;
+    if (this.nuevoReporte.trim() === '' || this.loading) return;
 
-    this.reportes.unshift({
-      id: this.reportes.length + 1,
+    const nuevo = {
       descripcion: this.nuevoReporte,
-      fecha: new Date()
-    });
+      fecha: new Date(),
+      idcamion: 1
+    };
 
-    this.nuevoReporte = '';
+    this.loading = true;
+
+    this.reporteService.insertReporte(nuevo as any).subscribe({
+      next: (res: any) => {
+
+
+        this.reportes.unshift({
+          id: res?.id || Date.now(),
+          descripcion: this.nuevoReporte,
+          fecha: new Date()
+        });
+
+        this.nuevoReporte = '';
+        this.loading = false;
+
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error(err);
+        this.loading = false;
+      }
+    });
   }
+
 }
