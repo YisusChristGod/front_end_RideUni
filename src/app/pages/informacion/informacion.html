@@ -5,18 +5,16 @@
 
   <!-- MAPA -->
   <div class="map-card" (click)="abrirMapa = true">
-    <div class="map-placeholder">
-      <span>Mapa de rutas (click para ampliar)</span>
-    </div>
+    <img src="/images/MapaUTS.png" class="map-img">
   </div>
 
   <!-- MODAL -->
   <div class="modal" *ngIf="abrirMapa" (click)="abrirMapa = false">
-    <div class="modal-content">
-      <div class="map-placeholder big">
-        <span>Mapa ampliado</span>
-      </div>
+
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <img src="/images/MapaUTS.png" class="map-img big">
     </div>
+
   </div>
 
   <!-- CAMIONES EN RUTA -->
@@ -28,6 +26,7 @@
       <div class="top" [ngClass]="c.disponible ? 'ok' : 'bad'"></div>
 
       <h3>{{ c.placa }}</h3>
+
       <p class="estado" [ngClass]="c.disponible ? 'ok-text' : 'bad-text'">
         {{ c.disponible ? 'Disponible' : 'No disponible' }}
       </p>
@@ -39,10 +38,10 @@
         <p>{{ c.telefono }}</p>
       </div>
 
-      <!-- SALIDA -->
       <div class="salida">
-        Salida: 7:25 AM
+        Salida: {{ c.salida | slice:0:5 }} | Llegada: {{ c.llegada | slice:0:5 }}
       </div>
+
     </div>
 
   </div>

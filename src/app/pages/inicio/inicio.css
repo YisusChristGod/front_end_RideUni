@@ -126,3 +126,7 @@ p {
   font-size: 30px;
   margin-bottom: 10px;
 }
+
+.btn {
+  text-decoration: none;
+}
