@@ -53,7 +53,7 @@ export class CamionesComponent implements OnInit {
           };
         });
 
-        // 🔥 IMPORTANTE (tu fix del doble click)
+        
         this.cdr.detectChanges();
       },
       error: (err) => console.error(err)

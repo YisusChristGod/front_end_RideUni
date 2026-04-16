@@ -67,7 +67,7 @@ h1 {
   align-items: center;
   justify-content: center;
 
-  z-index: 9999; /* 🔥 CLAVE */
+  z-index: 9999; 
 }
 
 .modal-content {
@@ -94,7 +94,7 @@ h1 {
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* barra estado */
+/* BARRA ESTADO */
 .top {
   height: 5px;
   border-radius: 10px 10px 0 0;
@@ -142,4 +142,24 @@ h1 {
   text-align: center;
   font-weight: bold;
   font-size: 1rem;
+}
+
+/* ZOOM CONTAINER */
+.zoom-container {
+  overflow: hidden;
+  max-width: 95vw;
+  max-height: 95vh;
+  position: relative;
+  cursor: grab;
+}
+
+.zoom-container:active {
+  cursor: grabbing;
+}
+
+.zoom-container img {
+  user-select: none;
+  pointer-events: none;
+  transform-origin: top left;
+  transition: transform 0.05s linear;
 }

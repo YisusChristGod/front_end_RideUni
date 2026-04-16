@@ -10,12 +10,31 @@
 
       <h2>Generar Reporte</h2>
 
+      <label>Selecciona el camión</label>
+
+      <select [(ngModel)]="idCamionSeleccionado" class="select-camion">
+        <option [ngValue]="null" disabled>Selecciona un camión</option>
+        <option *ngFor="let camion of camiones" [value]="camion.id">
+          {{ camion.modelo }}
+        </option>
+      </select>
+
+      <small class="error" *ngIf="!idCamionSeleccionado && intentoEnviar">
+        Selecciona un camión
+      </small>
+
       <textarea
         [(ngModel)]="nuevoReporte"
         placeholder="Describe el problema... (Ej: el camión llegó tarde, no pasó, etc)"
       ></textarea>
 
-      <button (click)="agregarReporte()">
+      <small class="error" *ngIf="nuevoReporte.trim() === '' && intentoEnviar">
+        Escribe una descripción
+      </small>
+
+      <button 
+        (click)="agregarReporte()" 
+        [disabled]="!idCamionSeleccionado || nuevoReporte.trim() === '' || loading">
         Enviar Reporte
       </button>
 
@@ -32,6 +51,8 @@
 
         <div class="contenido">
           <p class="desc">{{ r.descripcion }}</p>
+
+          <p class="camion">🚍 {{ r.camion }}</p>
 
           <small class="fecha">
             {{ r.fecha | date:'dd/MMM/yyyy, HH:mm' }}
