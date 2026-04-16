@@ -4,31 +4,8 @@
   <p class="sub">Recorrido del transporte universitario</p>
 
   <!-- MAPA -->
-  <div class="map-card" (click)="abrirMapa = true">
-    <img src="/images/MapaUTS.png" class="map-img">
-  </div>
-
-  <!-- MODAL -->
-  <div class="modal" *ngIf="abrirMapa" (click)="cerrarMapa()">
-
-    <div 
-      class="zoom-container" 
-      (click)="$event.stopPropagation()"
-      (wheel)="onZoom($event)"
-      (mousedown)="startDrag($event)"
-      (mousemove)="onDrag($event)"
-      (mouseup)="stopDrag()"
-      (mouseleave)="stopDrag()"
-    >
-
-      <img 
-        src="/images/MapaUTS.png"
-        draggable="false"
-        [style.transform]="'translate(' + posX + 'px,' + posY + 'px) scale(' + zoom + ')'"
-      />
-
-    </div>
-
+  <div class="map-card">
+    <div id="map" class="map-container"></div>
   </div>
 
   <!-- CAMIONES EN RUTA -->

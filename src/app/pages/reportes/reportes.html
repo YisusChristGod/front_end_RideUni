@@ -23,18 +23,14 @@
         Selecciona un camión
       </small>
 
-      <textarea
-        [(ngModel)]="nuevoReporte"
-        placeholder="Describe el problema... (Ej: el camión llegó tarde, no pasó, etc)"
-      ></textarea>
+      <textarea [(ngModel)]="nuevoReporte"
+        placeholder="Describe el problema... (Ej: el camión llegó tarde, no pasó, etc)"></textarea>
 
       <small class="error" *ngIf="nuevoReporte.trim() === '' && intentoEnviar">
         Escribe una descripción
       </small>
 
-      <button 
-        (click)="agregarReporte()" 
-        [disabled]="!idCamionSeleccionado || nuevoReporte.trim() === '' || loading">
+      <button (click)="agregarReporte()" [disabled]="!idCamionSeleccionado || nuevoReporte.trim() === '' || loading">
         Enviar Reporte
       </button>
 
@@ -52,7 +48,7 @@
         <div class="contenido">
           <p class="desc">{{ r.descripcion }}</p>
 
-          <p class="camion">🚍 {{ r.camion }}</p>
+          <p class="camion"> {{ r.camion }}</p>
 
           <small class="fecha">
             {{ r.fecha | date:'dd/MMM/yyyy, HH:mm' }}
